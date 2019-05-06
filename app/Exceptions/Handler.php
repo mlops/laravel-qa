@@ -13,7 +13,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        "\Symfony\Component\Translation\Translator::transChoice"
     ];
 
     /**
