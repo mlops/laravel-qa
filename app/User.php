@@ -27,13 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function questions(){
+    public function questions()
+    {
         return $this->hasMany(Question::class);
-    }
-    
-    public function setTitleAttibute($value){
-        $this->attributes['title'] = $value;
-        $this->attributes['slug'] = str_slug($value);
-
-    }
+    }    
 }
