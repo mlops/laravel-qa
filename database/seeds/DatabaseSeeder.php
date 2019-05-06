@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        //primeiro loop criando em users depois vai para questions
         factory(App\User::class, 3)->create()->each(function($u) {
             $u->questions()
               ->saveMany(
