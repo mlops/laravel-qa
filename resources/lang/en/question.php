@@ -4,6 +4,8 @@
 
 return [
     'submited' => 'Your Question has been submitted',
-    'success' => 'Success!'
+    'success' => 'Success!',
+    'update' => 'Update!',
+    'updated' => 'Your question has been updated.'
 
 ];
