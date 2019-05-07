@@ -6,6 +6,9 @@ return [
     'submited' => 'Your Question has been submitted',
     'success' => 'Success!',
     'update' => 'Update!',
-    'updated' => 'Your question has been updated.'
+    'updated' => 'Your question has been updated.',
+    'confirm' => 'Are you Sure?',
+    'deleted' => 'Deleted!',
+    'delete' => 'Your question has been deleted.'
 
 ];

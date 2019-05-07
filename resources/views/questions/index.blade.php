@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="card-body">
-                  @include('layouts._flash-message')
+        @include('layouts._flash-message')
                   @foreach ($questions as $question)
                     <div class="media">
                         <div class="d-flex flex-column counters">
@@ -40,6 +40,13 @@
                                 </h3>
                                 <div class="ml-auto">
                                 <a href="{{route('questions.edit',$question->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
+                                <form class="form-delete" action="{{ route('questions.destroy', $question->id)}}" method="post">
+                                    @method('DELETE')
+                                    {{-- {{methos_field('DELETE')}} --}}
+                                    @csrf
+                                    {{-- {{ ctrf_token() }} --}}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('@lang('question.confirm')')">Delete</button>
+                                </form>
                                 </div>
                                 
                             </div>
