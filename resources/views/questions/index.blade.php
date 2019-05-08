@@ -38,15 +38,22 @@
                                 <h3 class="mt-0">
                                 <a href="{{ $question->url }}">{{$question->title}}</a>
                                 </h3>
-                                <div class="ml-auto">
-                                <a href="{{route('questions.edit',$question->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
-                                <form class="form-delete" action="{{ route('questions.destroy', $question->id)}}" method="post">
-                                    @method('DELETE')
-                                    {{-- {{methos_field('DELETE')}} --}}
-                                    @csrf
-                                    {{-- {{ ctrf_token() }} --}}
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('@lang('question.confirm')')">Delete</button>
-                                </form>
+                                <div class="ml-auto">{{-- //edit and delete button --}}
+                                    @if (Auth::user()->can('update-question', $question))
+                                    <a href="{{route('questions.edit',$question->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
+                                    @endif
+                                    {{-- @can('update-question', $question)
+                                    <a href="{{route('questions.edit',$question->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
+                                    @endcan --}}
+                                    @can('delete-question', $question)
+                                    <form class="form-delete" action="{{ route('questions.destroy', $question->id)}}" method="post">
+                                        @method('DELETE')
+                                        {{-- {{methos_field('DELETE')}} --}}
+                                        @csrf
+                                        {{-- {{ ctrf_token() }} --}}
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('@lang('question.confirm')')">Delete</button>
+                                    </form>
+                                    @endcan
                                 </div>
                                 
                             </div>

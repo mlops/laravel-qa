@@ -9,6 +9,7 @@ return [
     'updated' => 'Your question has been updated.',
     'confirm' => 'Are you Sure?',
     'deleted' => 'Deleted!',
-    'delete' => 'Your question has been deleted.'
+    'delete' => 'Your question has been deleted.',
+    'access-denied' => 'Access Denied.'
 
 ];

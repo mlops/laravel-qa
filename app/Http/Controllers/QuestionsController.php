@@ -72,6 +72,10 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
+        if (\Gate::denies('update-question', $question)) {
+            // abort(403, "Access Denied A1" );
+            abort(403, trans('question.access-denied'));
+        }
         return view("questions.edit", compact('question'));
     }
 
@@ -84,6 +88,10 @@ class QuestionsController extends Controller
      */
     public function update(AskQuestionRequest $request, Question $question)
     {
+        if (\Gate::denies('update-question', $question)) {
+            // abort(403, "Access Denied A1" );
+            abort(403, trans('question.access-denied') );
+        }
         $question->update($request->only('title', 'body'));
         return redirect('/questions')->with('update', trans('question.updated'));
     }
@@ -96,6 +104,11 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
+        if (\Gate::denies('delete-question', $question)) {
+            // abort(403, "Access Denied A1" );
+            abort(403, trans('question.access-denied') );
+        }
+        
         $question->delete();
 
            return redirect('/questions')->with('delete', trans('question.delete'));
