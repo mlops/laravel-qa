@@ -20,7 +20,10 @@ class Question extends Model
 
     public function getUrlAttribute()
     {
-        return route("questions.show", $this->id);
+        // 1) without  RouteServiceProvider config to slug {{ $question->url }} in index.blade.php
+        // return route("questions.show", $this->id);
+        // 2) its possible because RouteServiceProvider config to slug
+        return route("questions.show", $this->slug);
     }
     public function getCreatedDateAttribute()
     {
@@ -37,6 +40,11 @@ class Question extends Model
             return "answered";
         }
         return "unanswered";
+    }
+
+    public function getBodyHtmlAttribute()
+    {
+        return \Parsedown::instance()->text($this->body);
     }
 
 }
