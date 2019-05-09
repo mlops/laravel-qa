@@ -25,12 +25,14 @@ class Question extends Model
         // 2) its possible because RouteServiceProvider config to slug
         return route("questions.show", $this->slug);
     }
+    
     public function getCreatedDateAttribute()
     {
         return $this->created_at->diffForHumans();
         // return $this->created_at->formatLocalized('%d/%B %A');
         // return $this->created_at->format('d-m-Y');
     }
+
     public function getStatusAttribute()
     {
         if ($this->answers_count > 0) {
@@ -46,6 +48,8 @@ class Question extends Model
     {
         return \Parsedown::instance()->text($this->body);
     }
+
+
     public function answers()
     {
         return $this->hasMany(Answer::class);

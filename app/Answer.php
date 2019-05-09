@@ -18,4 +18,15 @@ class Answer extends Model
     {
         return \Parsedown::instance()->text($this->body);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+        // esta variavel $answer pode ser qualquer nome
+        static::created(function($answer){
+            $answer->question->increment('answers_count');
+            $answer->question->save();
+        });
+    
+    }
 }
