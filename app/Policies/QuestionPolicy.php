@@ -34,7 +34,7 @@ class QuestionPolicy
     public function delete(User $user, Question $question)
     {
         // question has one ore more questions canot be removed even by the creator
-         return $user->id === $question->user_id && $question->answers < 1;
+         return $user->id === $question->user_id && $question->answers_count < 1;
     }
 
     
