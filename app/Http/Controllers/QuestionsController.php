@@ -63,7 +63,7 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        $question->increment('views'); //aqui incermenta e ja salva funçao uincrement do laravel.
+        $question->increment('views'); //aqui incrementa views campo BD e ja salva funçao incrementa do laravel.
 
         return view('questions.show', compact('question'));
 
