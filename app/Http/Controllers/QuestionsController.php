@@ -8,6 +8,11 @@ use App\Http\Requests\AskQuestionRequest;
 
 class QuestionsController extends Controller
 {
+
+    // este construct bloqueia todos os argumentos exceto index e show, se clicar em askquestion(create) redireciona pra login
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -72,11 +77,14 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
+        //authorize came from policy and register in AuthServiceProvider
+        $this->authorize("update", $question);
+
         return view("questions.edit", compact('question'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage. 
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Question  $question
@@ -84,6 +92,9 @@ class QuestionsController extends Controller
      */
     public function update(AskQuestionRequest $request, Question $question)
     {
+        //authorize came from policy and register in AuthServiceProvider
+        $this->authorize("update", $question);
+
         $question->update($request->only('title', 'body'));
         return redirect('/questions')->with('update', trans('question.updated'));
     }
@@ -96,6 +107,9 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
+        //authorize came from policy and register in AuthServiceProvider
+        $this->authorize("update", $question);
+
         $question->delete();
 
            return redirect('/questions')->with('delete', trans('question.delete'));
