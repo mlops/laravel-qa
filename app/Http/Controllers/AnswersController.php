@@ -19,9 +19,9 @@ class AnswersController extends Controller
      */
     public function store(Question $question, Request $request)
     {
-        $request->validate([
-            'body' => 'required'
-        ]);
+        // $request->validate([
+        //     'body' => 'required'
+        // ]);
 
         $question->answers()->create($request->validate([
             'body' => 'required'
@@ -69,6 +69,9 @@ class AnswersController extends Controller
      */
     public function destroy(Question $question, Answer $answer)
     {
-        return "deleted!!";
+        $this->authorize('delete', $answer);
+        $answer->delete();
+
+        return back()->with('success', "Your answer has been removed");
     }
 }

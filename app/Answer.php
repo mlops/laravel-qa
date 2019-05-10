@@ -29,7 +29,9 @@ class Answer extends Model
         // esta funçao sincroniza valor answers_count na tbl answers com answers tbl question_id  
         static::created(function($answer){
             $answer->question->increment('answers_count');
-            $answer->question->save();
+        });
+        static::deleted(function($answer){
+            $answer->question->decrement('answers_count');
         });
     
     }
