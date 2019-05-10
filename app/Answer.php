@@ -31,17 +31,11 @@ class Answer extends Model
             $answer->question->increment('answers_count');
         });
         static::deleted(function($answer){
-            $question = $answer->question;
-            $question->decrement('answers_count');
-            if ($question->best_answer_id === $answer->id) {
-                $question->best_answer_id = null;
-                $question->save();
-            }
+            $answer->question->decrement('answers_count');
+            
         });
 
     }
-
-
 
       public function getCreatedDateAttribute()
     {
