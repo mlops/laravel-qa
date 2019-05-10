@@ -36,10 +36,12 @@ class AnswersController extends Controller
      *
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
+     * @return estes parametros dento do edit vem do link em _index.php de answer 2 parametros 2 classes a receber 
      */
-    public function edit(Answer $answer)
+    public function edit(Question $question, Answer $answer)
     {
-        //
+        $this->authorize("update", $answer);
+        return view('answers.edit', compact('question', 'answer'));
     }
 
     /**
@@ -49,9 +51,14 @@ class AnswersController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request,Question $question, Answer $answer)
     {
-        //
+        $this->authorize("update", $answer);
+        $answer->update($request->validate([
+            'body' => 'required',
+        ]));
+        // aqui redireciono para show e passo slug como argumento
+        return redirect()->route('questions.show', $question->slug)->with('success', 'You answer has been updated');
     }
 
     /**
@@ -60,8 +67,8 @@ class AnswersController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Answer $answer)
+    public function destroy(Question $question, Answer $answer)
     {
-        //
+        return "deleted!!";
     }
 }
