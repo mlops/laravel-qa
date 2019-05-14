@@ -14,6 +14,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public $timestamps = false;
+    protected $table = 'users';
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -49,4 +51,8 @@ class User extends Authenticatable
 
     }
 
+    public function favorites()
+    {
+        return $this->belongsToMany(Question::class, 'favorites')->withTimestamps();//'user_id', 'question_id');
+    }
 }
