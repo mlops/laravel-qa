@@ -38623,7 +38623,7 @@ module.exports = { prefix: 'fas', iconName: 'check', icon: [512, 512, [], "f00c"
 /***/ (function(module, exports, __webpack_require__) {
 
 if (false) {
-  module.exports = require('./vue.common.prod.js')
+  module.exports = require('./vue.common.prod.js.js')
 } else {
   module.exports = __webpack_require__(43)
 }
