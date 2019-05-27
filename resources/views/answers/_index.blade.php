@@ -10,13 +10,43 @@
                 @foreach ($answers as $answer)
                 <div class="media">
                     <div class="d-flex flex-column vote-controls">
-                        <a href="#" title="This answer is useful" class="vote-up">
+                        {{-- <a href="#" title="This answer is useful" class="vote-up">
                             <i class="fas fa-caret-up fa-3x"></i>
                         </a>
                         <span class="votes-count">1230</span>
                         <a href="#" title="This answer is no useful" class="vote-down off">
                             <i class="fas fa-caret-down fa-3x"></i>
+                        </a> --}}
+                        <a href="#" title="This answer is useful" class="vote-up-{{Auth::guest() ? 'favorited' : '' }}" onclick="event.preventDefault(); document.getElementById('up-vote-answer-{{ $answer->id }}').submit()">
+                            <i class="fas fa-caret-up fa-3x"></i>
                         </a>
+                        <form action="/answers/{{ $answer->id }}/vote" method="POST" id="up-vote-answer-{{ $answer->id }}" style="display:none">
+                            @csrf
+                            <input type="hidden" name="vote" value="1">
+                        </form>
+                        
+                        <span class="votes-count">{{ $answer->votes_count}}</span>
+                        
+                        <a href="#" title="This question is no useful" class="vote-down {{Auth::guest() ? 'favorited' : '' }}" onclick="event.preventDefault(); document.getElementById('down-vote-answer-{{ $answer->id }}').submit()">
+                            <i class="fas fa-caret-down fa-3x"></i>
+                        </a>
+                        <form action="/answers/{{ $answer->id }}/vote" method="POST" id="down-vote-answer-{{ $answer->id }}" style="display:none">
+                            @csrf
+                            <input type="hidden" name="vote" value="-1">
+                        </form>
+                        
+                        {{-- <a href="#" title="Click to mark as favorite question(Click again to undo)" class="favorite mt-2 {{ Auth::guest() ? 'off' : ($answer->is_favorited ? 'favorited' : '') }}" onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $answer->id }}').submit()">
+                        
+                            <i class="fas fa-star fa-2x"></i>
+                            <span class="favorites-count">{{ $answer->favorites_count}}</span>
+                        </a>
+                        <form action="/answers/{{ $answer->id }}/favorites" method="POST" id="favorite-question-{{ $answer->id }}" style="display:none">
+                            @csrf
+                            @if($answer->is_favorited)
+                            @method ('DELETE')
+                            @endif
+                        
+                        </form> --}}
                         @can('accept',$answer)
                     
                             <a title="Mark this answer as best answer" class="{{ $answer->status}} mt-2"

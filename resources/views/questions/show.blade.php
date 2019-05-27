@@ -19,7 +19,9 @@
                     <hr>
                     <div class="media">
                         <div class="d-flex flex-column vote-controls">
-                            <a href="#" title="This quuestion is useful" class="vote-up-{{Auth::guest() ? 'favorited' : '' }}" onclick="event.preventDefault(); document.getElementById('up-vote-question-{{ $question->id }}').submit()">
+
+
+                            <a href="#" title="This question is useful" class="vote-up-{{Auth::guest() ? 'favorited' : '' }}" onclick="event.preventDefault(); document.getElementById('up-vote-question-{{ $question->id }}').submit()">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
                             <form action="/questions/{{ $question->id }}/vote" method="POST" id="up-vote-question-{{ $question->id }}" style="display:none">
@@ -54,6 +56,10 @@
 
                             </form>
 
+
+
+
+                            
                         </div>
                         <div class="media-body">
                             {{-- _html em body markdow syntax laravel new --}}
