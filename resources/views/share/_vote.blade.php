@@ -18,7 +18,8 @@ $firstURISegment = 'answers';
 @endphp
 
 <div class="d-flex flex-column vote-controls">
-    <a href="#" title="This {{$name}} is useful" class="vote-up-{{Auth::guest() ? 'favorited' : '' }}" onclick="event.preventDefault(); document.getElementById('up-vote-{{$formId }}').submit()">
+    <a href="#" title="This {{$name}} is useful" class
+    ="vote-up-{{Auth::guest() ? 'favorited' : '' }}" onclick="event.preventDefault(); document.getElementById('up-vote-{{$formId }}').submit()">
         <i class="fas fa-caret-up fa-3x"></i>
     </a>
     <form action="{{$formAction}}" method="POST" id="up-vote-{{$formId }}" style="display:none">

@@ -59,12 +59,15 @@
                                 <a href="{{$question->user->url}}">{{$question->user->name}}</a>
                                 <small class="text-muted">{{$question->created_date}}</small>
                             </p>
-                                {{ str_limit($question->body, 150)}}
+                               <div class="excerpt">{{ $question->excerpt(300) }}
+                                </div>
                         </div>
                     </div>
                     <hr>              
                   @endforeach
+                  <div class="mx-auto">
                       {{ $questions->links() }}
+                </div>
                 </div>
             </div>
         </div>

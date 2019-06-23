@@ -23,6 +23,11 @@ class Question extends Model
         $this->attributes['slug'] = str_slug($value);
     }
 
+    // public function setBodyAttributes($value)
+    // {
+    //     //save data clean in DB
+    //     $this->attributes['body'] = clean($value);
+    // }
     public function getUrlAttribute()
     {
         // 1) without  RouteServiceProvider config to slug {{ $question->url }} in index.blade.php
@@ -51,7 +56,8 @@ class Question extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return \Parsedown::instance()->text($this->body);
+        // return \Parsedown::instance()->text($this->body);
+        return clean($this->bodyHtml());
     }
 
 
@@ -83,6 +89,21 @@ class Question extends Model
         return $this->favorites->count();
     }
 
+    public function excerpt($length)
+    {
+        return str_limit(strip_tags($this->bodyHtml()), $length);
+    }
+
+    public function getExcerptAttribute()
+    {
+        // return str_limit(strip_tags($this->bodyHtml()), 300);
+        return $this->excerpt(250);
+    }
+
+    private function bodyHtml()
+    {
+        return \Parsedown::instance()->text($this->body);
+    }
 
     
 }
